@@ -1,0 +1,14 @@
+version: '2'
+services:
+    mysql:
+        image: mariadb:latest
+        env_file:
+            - ./.mysql.env
+        volumes:
+            - ./storage/mysql:/var/lib/mysql
+    web:
+        build: ./
+        ports:
+            - 8080:80
+        links:
+            - mysql:mysql
